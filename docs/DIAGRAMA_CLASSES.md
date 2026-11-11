@@ -1,41 +1,68 @@
-# Diagrama de classes
+# Diagrama de classes e fluxo
 
-O diagrama abaixo representa as principais relações da implementação:
+## Responsabilidades e relações
 
-- RepositorioJornadas é a interface de acesso aos dados.
-- RepositorioJornadasMemoria implementa essa interface.
-- RelatorioJornada é a classe abstrata que define o Template Method.
-- As três subclasses implementam os relatórios concretos.
-- CalculadoraIndicadores e FormatadorRelatorio são colaboradores injetados na classe-base.
-- Jornada, Periodo e DocumentoRelatorio representam os dados do domínio e da saída.
+```mermaid
+classDiagram
+    class RelatorioJornada {
+      <<abstract>>
+      -RepositorioJornadas repositorio
+      -CalculadoraIndicadores calculadora
+      -FormatadorRelatorio formatador
+      +gerar(Periodo) String final
+      #titulo() String*
+      #selecionar(List~Jornada~, Periodo) List~Jornada~*
+      #calcularIndicadores(List~Jornada~) Map
+      #montarDetalhes(List~Jornada~) List~String~
+    }
+    class RelatorioJornadasAtivas
+    class RelatorioJornadasConcluidas
+    class RelatorioJornadasInterrompidas
+    class RepositorioJornadas {
+      <<interface>>
+      +listarTodas() List~Jornada~
+    }
+    class RepositorioJornadasMemoria
+    class CalculadoraIndicadores
+    class FormatadorRelatorio
+    class Jornada
+    class Periodo
+    class DocumentoRelatorio
+    RelatorioJornada <|-- RelatorioJornadasAtivas
+    RelatorioJornada <|-- RelatorioJornadasConcluidas
+    RelatorioJornada <|-- RelatorioJornadasInterrompidas
+    RelatorioJornada --> RepositorioJornadas
+    RepositorioJornadas <|.. RepositorioJornadasMemoria
+    RelatorioJornada --> CalculadoraIndicadores
+    RelatorioJornada --> FormatadorRelatorio
+    RelatorioJornada --> DocumentoRelatorio
+    DocumentoRelatorio --> Periodo
+    RepositorioJornadasMemoria --> Jornada
+```
 
-## Fluxo do Template Method
+## Sequência do Template Method
 
-1. A aplicação seleciona um tipo concreto de relatório.
-2. A aplicação chama gerar(Periodo).
-3. O período é validado na criação do objeto Periodo.
-4. O repositório fornece a lista de jornadas.
-5. A subclasse seleciona os registros pertinentes ao período.
-6. A classe-base calcula os indicadores, com possibilidade de especialização.
-7. A classe-base monta os detalhes, também com possibilidade de especialização.
-8. O documento é criado e enviado ao formatador.
-9. A aplicação exibe o texto no console.
+```mermaid
+flowchart TD
+    A[Aplicação escolhe o relatório] --> B[Chama gerar Periodo]
+    B --> C[Valida o período]
+    C --> D[Consulta RepositorioJornadas]
+    D --> E[Subclasse seleciona jornadas]
+    E --> F[Calcula indicadores]
+    F --> G[Monta detalhes]
+    G --> H[Cria DocumentoRelatorio]
+    H --> I[FormatadorRelatorio formata]
+    I --> J[Texto exibido no console]
+```
 
-## Esboço UML textual
+## Como explicar o diagrama
 
-RelatorioJornada (abstrata)
-  ├── RelatorioJornadasAtivas
-  ├── RelatorioJornadasConcluidas
-  └── RelatorioJornadasInterrompidas
+- A classe abstrata `RelatorioJornada` contém o método Template Method `gerar(Periodo)`, que é final e retorna uma `String` formatada.
+- As três subclasses herdam o fluxo e definem título e seleção. O relatório de concluídas também especializa o cálculo de indicadores e os detalhes.
+- `RepositorioJornadas` é uma interface; `RepositorioJornadasMemoria` fornece os dados fictícios.
+- `CalculadoraIndicadores` e `FormatadorRelatorio` são colaboradores recebidos pela classe-base.
+- `Jornada`, `Periodo` e `DocumentoRelatorio` representam dados de entrada, recorte temporal e saída estruturada.
 
-RelatorioJornada --> RepositorioJornadas (interface)
-RelatorioJornada --> CalculadoraIndicadores
-RelatorioJornada --> FormatadorRelatorio
-RepositorioJornadasMemoria ..|> RepositorioJornadas
-RepositorioJornadasMemoria --> Jornada
-RelatorioJornada --> DocumentoRelatorio
-DocumentoRelatorio --> Periodo
-Jornada --> StatusJornada
-Jornada --> EtapaJornada
+## Atenção à distinção entre algoritmo e resultado
 
-O método gerar(Periodo) é final e mantém o fluxo comum. Os métodos titulo() e selecionar(...) são pontos abstratos de variação. calcularIndicadores(...) e montarDetalhes(...) podem ser especializados pelas subclasses.
+O Template Method não significa que todos os relatórios produzem o mesmo conteúdo. Significa que a sequência de geração é definida em um único lugar. As subclasses preenchem os pontos de variação previstos pela classe-base.
