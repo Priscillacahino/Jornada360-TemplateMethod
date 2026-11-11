@@ -89,6 +89,8 @@ Consulte [docs/COMPARACAO.md](docs/COMPARACAO.md) para a análise comparativa.
 
 - [Comparação com o projeto original](docs/COMPARACAO.md)
 - [Diagrama de classes e fluxo](docs/DIAGRAMA_CLASSES.md)
+- [Exemplo prático do Template Method](docs/EXEMPLO_TEMPLATE_METHOD.md)
+- [Perguntas e respostas para a apresentação](docs/PERGUNTAS_APRESENTACAO.md)
 - [Roteiro de apresentação e perguntas](docs/ROTEIRO_APRESENTACAO.md)
 
 ## Escopo, limitações e validação
