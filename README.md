@@ -22,7 +22,7 @@ Implementar três relatórios de console — jornadas ativas, concluídas e inte
 - `src/br/com/jornada360/report`: Template Method e relatórios concretos.
 - `src/br/com/jornada360/service`: cálculo e formatação.
 - `src/br/com/jornada360/testes`: testes executáveis sem bibliotecas externas.
-- `docs`: comparação, diagrama textual e roteiro de apresentação.
+- `docs`: comparação, diagrama textual, guia didático e perguntas técnicas.
 
 ## Padrão Template Method
 
@@ -91,8 +91,7 @@ Consulte [docs/COMPARACAO.md](docs/COMPARACAO.md) para a análise comparativa.
 - [Diagrama de classes e fluxo](docs/DIAGRAMA_CLASSES.md)
 - [Guia didático completo do Template Method](docs/GUIA_TEMPLATE_METHOD.md)
 - [Exemplo prático do Template Method](docs/EXEMPLO_TEMPLATE_METHOD.md)
-- [Perguntas e respostas para a apresentação](docs/PERGUNTAS_APRESENTACAO.md)
-- [Roteiro de apresentação e perguntas](docs/ROTEIRO_APRESENTACAO.md)
+- [Perguntas e respostas técnicas (resumo)](docs/PERGUNTAS_APRESENTACAO.md)
 
 ## Escopo, limitações e validação
 
