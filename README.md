@@ -69,6 +69,13 @@ Execute `br.com.jornada360.testes.TestesRelatorios` como **Java Application**. S
 
 O Template Method foi escolhido porque o problema didático apresenta uma sequência de geração compartilhada, com etapas específicas variando por tipo de relatório.
 
+## Exemplos cotidianos do padrão
+
+- **Receitas culinárias:** separar ingredientes, preparar, cozinhar e servir são etapas comuns; a execução varia conforme a receita.
+- **Atendimento bancário:** identificação, conferência documental, análise e resposta seguem um fluxo; as verificações específicas variam conforme o produto.
+
+São analogias didáticas de sequência fixa com etapas variáveis.
+
 ## Relação com o Jornada360 original
 
 Este exercício parte do mesmo domínio conceitual, mas possui escopo, código e documentação próprios. Ele não altera nem substitui o projeto original, de autoria de Priscilla Cahino: [Jornada360 original](https://github.com/Priscillacahino/Jornada360).
@@ -83,7 +90,7 @@ Consulte [docs/COMPARACAO.md](docs/COMPARACAO.md) para a análise comparativa.
 - Paulo Henrique
 - Gabriel Lucas
 
-**Nota de autoria:** o Jornada360 original permanece de autoria e propriedade intelectual de Priscilla Cahino. Paulo Henrique e Gabriel Lucas participam do desenvolvimento deste projeto acadêmico independente.
+**Nota de autoria:** o Jornada360 original é de autoria de Priscilla Cahino. Este projeto acadêmico é uma atividade em grupo; Priscilla realizou a implementação, a organização da documentação e os testes, enquanto a apresentação e as explicações orais foram distribuídas aos demais integrantes.
 
 ## Documentação adicional
 
@@ -95,4 +102,4 @@ Consulte [docs/COMPARACAO.md](docs/COMPARACAO.md) para a análise comparativa.
 
 ## Escopo, limitações e validação
 
-Os dados são fictícios e mantidos em memória; são reiniciados ao encerrar o programa. O projeto não realiza operações reais com clientes e não integra banco de dados ou serviços externos. O código e a estrutura foram publicados; a execução final no Eclipse ainda precisa ser validada no ambiente local com JDK 17+.
+Os dados são fictícios e mantidos em memória; são reiniciados ao encerrar o programa. O projeto não realiza operações reais com clientes e não integra banco de dados ou serviços externos. O código e a estrutura foram publicados. A execução dos três relatórios e dos testes automatizados foi realizada no Eclipse com JDK 17+, com resultados positivos e capturas de tela encaminhadas ao professor.
