@@ -9,6 +9,7 @@ public abstract class RelatorioJornada {
  private final RepositorioJornadas repositorio;
  private final CalculadoraIndicadores calculadora;
  private final FormatadorRelatorio formatador;
+  // Injeta as dependências de dados, cálculo e formatação.
  protected RelatorioJornada(RepositorioJornadas r, CalculadoraIndicadores c, FormatadorRelatorio f) {
   repositorio=Objects.requireNonNull(r); calculadora=Objects.requireNonNull(c); formatador=Objects.requireNonNull(f);
  }
@@ -21,11 +22,16 @@ public abstract class RelatorioJornada {
   List<String> detalhes=montarDetalhes(selecionadas);
   return formatador.formatar(new DocumentoRelatorio(titulo(),periodo,selecionadas.size(),indicadores,detalhes));
  }
+  // Define o título específico de cada relatório.
  protected abstract String titulo();
+  // Seleciona as jornadas conforme as regras do relatório concreto.
  protected abstract List<Jornada> selecionar(List<Jornada> jornadas, Periodo periodo);
+  // Calcula indicadores padrão; subclasses podem especializar esta etapa.
  protected Map<String,Long> calcularIndicadores(List<Jornada> jornadas) { return calculadora.porEtapa(jornadas); }
+  // Monta os detalhes padrão; subclasses podem personalizar a saída.
  protected List<String> montarDetalhes(List<Jornada> jornadas) {
   return jornadas.stream().map(j -> j.id()+" | "+j.cliente()+" | Etapa: "+j.etapaAtual()).toList();
  }
+  // Disponibiliza o serviço de cálculo às subclasses.
  protected CalculadoraIndicadores calculadora() { return calculadora; }
 }
